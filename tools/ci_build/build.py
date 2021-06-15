@@ -427,7 +427,7 @@ def parse_arguments():
         help="Use the Batch Normalization operator implementation from the ArmNN EP.")
     parser.add_argument(
         "--armnn_gemm_acl", action='store_true',
-        help="Use the Gemn operator implementation from the ACL EP for the ArmNN EP.")
+        help="Use the Gemm operator implementation from the ACL EP for the ArmNN EP.")
     parser.add_argument(
         "--armnn_home", help="Path to ArmNN home dir")
     parser.add_argument(

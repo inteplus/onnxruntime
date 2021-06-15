@@ -104,7 +104,7 @@ option(onnxruntime_USE_ACL_2002 "Build with ACL version 2002 support" OFF)
 option(onnxruntime_USE_ARMNN "Build with ArmNN support" OFF)
 option(onnxruntime_ARMNN_RELU_USE_CPU "Use the CPU implementation for the Relu operator for the ArmNN EP" ON)
 option(onnxruntime_ARMNN_BN_USE_CPU "Use the CPU implementation for the Batch Normalization operator for the ArmNN EP" ON)
-option(onnxruntime_ARMNN_GEMM_USE_ACL "Use the CPU implementation for the Gemm operator for the ArmNN EP" ON)
+option(onnxruntime_ARMNN_GEMM_USE_ACL "Use the CPU implementation for the Gemm operator for the ArmNN EP" OFF)
 option(onnxruntime_ENABLE_INSTRUMENT "Enable Instrument with Event Tracing for Windows (ETW)" OFF)
 option(onnxruntime_USE_TELEMETRY "Build with Telemetry" OFF)
 #The onnxruntime_PREFER_SYSTEM_LIB is mainly designed for package managers like apt/yum/vcpkg.
