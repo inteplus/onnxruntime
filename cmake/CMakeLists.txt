@@ -1411,7 +1411,7 @@ if (onnxruntime_USE_CUDA)
       # Support for Jetson/Tegra ARM devices
       set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -gencode=arch=compute_53,code=sm_53") # TX1, Nano
       set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -gencode=arch=compute_62,code=sm_62") # TX2
-      if (CMAKE_CUDA_COMPILER_VERSION VERSION_GREATER 9)
+      if (CMAKE_CUDA_COMPILER_VERSION VERSION_GREATER_EQUAL 10)
         set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -gencode=arch=compute_72,code=sm_72") # AGX Xavier, NX Xavier
       endif()
     else()
