@@ -191,6 +191,11 @@ def parse_arguments():
         "--cudnn_home", help="Path to CUDNN home. "
         "Read from CUDNN_HOME environment variable if --use_cuda is true and "
         "--cudnn_home is not specified.")
+<<<<<<< HEAD
+=======
+    parser.add_argument(
+        "--enable_cuda_line_info", action='store_true', help="Enable CUDA line info.")
+>>>>>>> e7e474f5b... bug fix
 
     # Python bindings
     parser.add_argument(
@@ -768,6 +773,19 @@ def generate_build_tree(cmake_path, source_dir, build_dir, cuda_home, cudnn_home
             "ON" if args.build_micro_benchmarks else "OFF"),
         "-Donnxruntime_USE_ROCM=" + ("ON" if args.use_rocm else "OFF"),
         "-Donnxruntime_ROCM_HOME=" + (rocm_home if args.use_rocm else ""),
+<<<<<<< HEAD
+=======
+        "-DOnnxruntime_GCOV_COVERAGE=" + ("ON" if args.code_coverage else "OFF"),
+        "-Donnxruntime_USE_MPI=" + ("ON" if args.use_mpi else "OFF"),
+        "-Donnxruntime_ENABLE_MEMORY_PROFILE=" + ("ON" if args.enable_memory_profile else "OFF"),
+        "-Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=" + ("ON" if args.enable_cuda_line_info else "OFF"),
+        "-Donnxruntime_BUILD_WEBASSEMBLY=" + ("ON" if args.build_wasm else "OFF"),
+        "-Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=" + ("OFF" if args.disable_wasm_exception_catching
+                                                                  else "ON"),
+        "-Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=" + ("ON" if args.enable_wasm_threads else "OFF"),
+        "-Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=" + ("ON" if args.enable_wasm_debug_info else "OFF"),
+        "-Donnxruntime_ENABLE_EAGER_MODE=" + ("ON" if args.build_eager_mode else "OFF"),
+>>>>>>> e7e474f5b... bug fix
     ]
 
     if acl_home and os.path.exists(acl_home):
