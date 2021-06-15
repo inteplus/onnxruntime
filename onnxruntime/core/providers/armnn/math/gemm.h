@@ -18,7 +18,7 @@
 namespace onnxruntime {
 namespace armnn_ep {
 
-#ifdf GEMM_ARMNN_USE_ACL
+#ifdef GEMM_ARMNN_USE_ACL
 template <typename T>
 class Gemm : public onnxruntime::acl::Gemm<T> {}; // redirect to ACL
 #else
