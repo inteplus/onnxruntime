@@ -34,9 +34,16 @@ class Gemm : public onnxruntime::Gemm<T> {
   }
 
   Status Compute(OpKernelContext* context) const override {
-    const auto X = context->Input<Tensor>(0);
-    const auto W = context->Input<Tensor>(1);
-    const auto B = context->Input<Tensor>(2);
+    ORT_TRY {
+      const auto X = context->Input<Tensor>(0);
+      const auto W = context->Input<Tensor>(1);
+      const auto B = context->Input<Tensor>(2);
+    }
+    ORT_CATCH(const std::exception& e) {
+      LOGS_DEFAULT(WARNING) << "Switching to cpu implementation to bypass an exception caught:";
+      LOGS_DEFAULT(WARNING) << e.what();
+      return onnxruntime::Gemm<T>::Compute(context);
+    }
 
     bool useBias = B != nullptr && beta_ != 0;
     bool FC = alpha_ == 1 && (beta_ == 1 || beta_ == 0);
