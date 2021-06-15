@@ -207,9 +207,6 @@ def parse_arguments():
         "--cudnn_home is not specified.")
     parser.add_argument(
         "--enable_cuda_line_info", action='store_true', help="Enable CUDA line info.")
-    parser.add_argument(
-        "--only_cuda90", action='store_true',
-        help="Restrict the CUDA code to run under CUDA 9.0 only (for JetPack 3.3+).")
 
     # Python bindings
     parser.add_argument(
@@ -746,7 +743,6 @@ def generate_build_tree(cmake_path, source_dir, build_dir, cuda_home, cudnn_home
         "-Donnxruntime_USE_MPI=" + ("ON" if args.use_mpi else "OFF"),
         "-Donnxruntime_ENABLE_MEMORY_PROFILE=" + ("ON" if args.enable_memory_profile else "OFF"),
         "-Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=" + ("ON" if args.enable_cuda_line_info else "OFF"),
-        "-Donnxruntime_ONLY_CUDA90=" + ("ON" if args.only_cuda90 else "OFF"),
         "-Donnxruntime_BUILD_WEBASSEMBLY=" + ("ON" if args.build_wasm else "OFF"),
         "-Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=" + ("OFF" if args.disable_wasm_exception_catching
                                                                   else "ON"),
