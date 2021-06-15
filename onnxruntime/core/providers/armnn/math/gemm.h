@@ -10,9 +10,17 @@
 #include "core/providers/cpu/math/gemm.h"
 #include "core/providers/armnn/armnn_execution_provider.h"
 
+#ifdef GEMM_ARMNN_USE_ACL
+#include "core/providers/acl/math/gemm.h"
+#endif
+
 namespace onnxruntime {
 namespace armnn_ep {
 
+#ifdf GEMM_ARMNN_USE_ACL
+template <typename T>
+class Gemm : public onnxruntime::acl::Gemm<T> {}; // redirect to ACL
+#else
 typedef std::map<OpKernel*, armnn::NetworkId>::iterator GEMMLayersIterator;
 
 template <typename T>
@@ -188,6 +196,7 @@ thread_local std::map<OpKernel*, armnn::NetworkId> onnxruntime::armnn_ep::Gemm<T
 
 template <typename T>
 armnn::IRuntimePtr Gemm<T>::run = armnn::IRuntimePtr(nullptr, nullptr);
+#endif
 
 }  // namespace armnn_ep
 }  // namespace onnxruntime
