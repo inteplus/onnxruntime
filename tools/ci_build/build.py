@@ -472,9 +472,6 @@ def parse_arguments():
         "--armnn_bn", action='store_true',
         help="Use the Batch Normalization operator implementation from the ArmNN EP.")
     parser.add_argument(
-        "--armnn_gemm", action='store_true',
-        help="Use the Gemm operator implementation from the ArmNN EP.")
-    parser.add_argument(
         "--armnn_home", help="Path to ArmNN home dir")
     parser.add_argument(
         "--armnn_libs", help="Path to ArmNN libraries")
@@ -728,7 +725,6 @@ def generate_build_tree(cmake_path, source_dir, build_dir, cuda_home, cudnn_home
         "-Donnxruntime_USE_ARMNN=" + ("ON" if args.use_armnn else "OFF"),
         "-Donnxruntime_ARMNN_RELU_USE_CPU=" + ("OFF" if args.armnn_relu else "ON"),
         "-Donnxruntime_ARMNN_BN_USE_CPU=" + ("OFF" if args.armnn_bn else "ON"),
-        "-Donnxruntime_ARMNN_GEMM_USE_CPU=" + ("OFF" if args.armnn_gemm else "ON"),
         # Training related flags
         "-Donnxruntime_ENABLE_NVTX_PROFILE=" + ("ON" if args.enable_nvtx_profile else "OFF"),
         "-Donnxruntime_ENABLE_TRAINING=" + ("ON" if args.enable_training else "OFF"),
