@@ -381,6 +381,10 @@ bool launchSoftmaxKernel(
     size_t element_size) {        // size of element: 2 for half, and 4 for float
   const int* global_count = reinterpret_cast<const int*>(pinned_buffer);
 
+#if (CUDA_VERSION < 10000)
+  ORT_THROW("LongFormerAttention needs CUDA 10.0 or later.");
+  return false;
+#else
   bool is_fp16 = (element_size == 2);
   void* scratch1 = reinterpret_cast<char*>(workspace);
   char* scratch2 = (char*)scratch1 + GetScratch1Size(element_size, batch_size, num_heads, sequence_length, window);
@@ -821,6 +825,7 @@ bool launchSoftmaxKernel(
   }
 
   return true;
+#endif
 }
 
 template <typename T>
