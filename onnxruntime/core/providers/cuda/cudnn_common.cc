@@ -47,6 +47,7 @@ Status CudnnTensor::Set(const CudnnTensor& x_desc, cudnnBatchNormMode_t mode) {
   return Status::OK();
 }
 
+#if defined(CUDA_VERSION) && CUDA_VERSION >= 10000
 CudnnDataTensor::CudnnDataTensor()
     : tensor_(nullptr) {
 }
@@ -82,6 +83,7 @@ Status CudnnDataTensor::Set(cudnnDataType_t dataType,
                                                   static_cast<void*>(&padding_fill)));
   return Status::OK();
 }
+#endif
 
 CudnnFilterDescriptor::CudnnFilterDescriptor() : desc_(nullptr) {
   cudnnCreateFilterDescriptor(&desc_);
