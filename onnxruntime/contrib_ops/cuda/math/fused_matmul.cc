@@ -20,11 +20,15 @@ namespace cuda {
 
 REGISTER_KERNEL_TYPED(TransposeMatMul, float)
 REGISTER_KERNEL_TYPED(TransposeMatMul, double)
+#if CUDA_VERSION >= 10000
 REGISTER_KERNEL_TYPED(TransposeMatMul, MLFloat16)
+#endif
 
 REGISTER_KERNEL_TYPED(FusedMatMul, float)
 REGISTER_KERNEL_TYPED(FusedMatMul, double)
+#if CUDA_VERSION >= 10000
 REGISTER_KERNEL_TYPED(FusedMatMul, MLFloat16)
+#endif
 
 }  // namespace cuda
 }  // namespace contrib
