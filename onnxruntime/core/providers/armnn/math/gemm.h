@@ -43,8 +43,8 @@ class Gemm : public onnxruntime::Gemm<T> {
       B = context->Input<Tensor>(2);
     }
     ORT_CATCH(const std::exception& e) {
-      LOGS_DEFAULT(WARNING) << "Switching to cpu implementation to bypass an exception caught:";
-      LOGS_DEFAULT(WARNING) << e.what();
+      LOGS_DEFAULT(VERBOSE) << "Switching to cpu implementation to bypass an exception caught:";
+      LOGS_DEFAULT(VERBOSE) << e.what();
       return onnxruntime::Gemm<T>::Compute(context);
     }
 
