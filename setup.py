@@ -39,10 +39,10 @@ for arg in sys.argv[1:]:
 
 # The following arguments are mutually exclusive
 if '--use_tensorrt' in sys.argv:
-    package_name = 'onnxruntime-j33-tensorrt' if not nightly_build else 'ort-trt-nightly'
+    package_name = 'onnxruntime-gpu-tensorrt' if not nightly_build else 'ort-trt-nightly'
     sys.argv.remove('--use_tensorrt')
 elif '--use_cuda' in sys.argv:
-    package_name = 'onnxruntime-j33' if not nightly_build else 'ort-gpu-nightly'
+    package_name = 'onnxruntime-gpu' if not nightly_build else 'ort-gpu-nightly'
     sys.argv.remove('--use_cuda')
 elif '--use_openvino' in sys.argv:
     package_name = 'onnxruntime-openvino'
