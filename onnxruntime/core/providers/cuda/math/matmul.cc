@@ -40,7 +40,9 @@ namespace cuda {
 
 REGISTER_KERNEL_TYPED(float)
 REGISTER_KERNEL_TYPED(double)
+#if defined(CUDA_VERSION) && CUDA_VERSION >= 10000
 REGISTER_KERNEL_TYPED(MLFloat16)
+#endif
 
 // StridedBatchedGemm can be used for the following GEMM computation
 // C[pnm] = A[pnk]*B[km] or C[pnm] = A[pnk]*B[pkm]
