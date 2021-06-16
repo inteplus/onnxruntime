@@ -21,11 +21,15 @@ namespace cuda {
 // TransposeMatMul is kept here for backward compatibility
 REGISTER_KERNEL_TYPED(TransposeMatMul, float)
 REGISTER_KERNEL_TYPED(TransposeMatMul, double)
+#if CUDA_VERSION >= 10000
 REGISTER_KERNEL_TYPED(TransposeMatMul, MLFloat16)
+#endif
 
 REGISTER_KERNEL_TYPED(FusedMatMul, float)
 REGISTER_KERNEL_TYPED(FusedMatMul, double)
+#if CUDA_VERSION >= 10000
 REGISTER_KERNEL_TYPED(FusedMatMul, MLFloat16)
+#endif
 
 #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
 REGISTER_KERNEL_TYPED(TransposeMatMul, BFloat16)
