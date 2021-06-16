@@ -27,7 +27,9 @@ namespace cuda {
       LongformerAttention<T>);
 
 REGISTER_KERNEL_TYPED(float)
+#if (CUDA_VERSION >= 10000)
 REGISTER_KERNEL_TYPED(MLFloat16)
+#endif
 
 template <typename T>
 LongformerAttention<T>::LongformerAttention(const OpKernelInfo& info) : CudaKernel(info), LongformerAttentionBase(info) {}

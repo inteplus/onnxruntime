@@ -281,6 +281,10 @@ bool launchSoftmaxKernel(
     ORT_THROW("LongformerAttention CUDA operator does not support batch size > 128.");
   }
 
+#if (CUDA_VERSION < 10000)
+  ORT_THROW("LongFormerAttention needs CUDA 10.0 or later.");
+  return false;
+#else
   bool is_fp16 = (element_size == 2);
   void* scratch1 = reinterpret_cast<char*>(workspace) + 3 * sizeof(int) * batch_size * sequence_length;
   void* scratch2 = reinterpret_cast<char*>(scratch1) + GetAttentionScratchSize(element_size, batch_size, num_heads, sequence_length, sequence_length);
@@ -735,6 +739,7 @@ bool launchSoftmaxKernel(
   }
 
   return true;
+#endif
 }
 
 template <typename T>
