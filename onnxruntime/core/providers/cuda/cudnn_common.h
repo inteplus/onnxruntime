@@ -29,6 +29,7 @@ class CudnnTensor final {
   cudnnTensorDescriptor_t tensor_;
 };
 
+#if defined(CUDA_VERSION) && CUDA_VERSION >= 10000
 class CudnnDataTensor final {
  public:
   CudnnDataTensor();
@@ -48,6 +49,7 @@ class CudnnDataTensor final {
 
   cudnnRNNDataDescriptor_t tensor_;
 };
+#endif
 
 class CudnnFilterDescriptor final {
  public:
