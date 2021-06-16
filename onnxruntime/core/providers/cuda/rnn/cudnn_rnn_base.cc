@@ -141,6 +141,7 @@ Status CudnnRnnBase<T>::CacheCudnnRnnWeights(const OpKernelInfo& info) {
 template <typename T>
 Status CudnnRnnBase<T>::ComputeInternal(OpKernelContext* ctx) const {
 #if defined(CUDA_VERSION) && CUDA_VERSION < 10000
+  (void)(ctx); // to disable warning 'unused-parameter'
   return ORT_MAKE_STATUS(ONNXRUNTIME, NOT_IMPLEMENTED, "CudnnRnnBase is not implemented fully under CUDA 9.0.");
 #else
   typedef typename ToCudaType<T>::MappedType CudaT;
