@@ -161,7 +161,6 @@ template Tensor DeviceHelpers::CudaDeviceHelpers::ReduceSum<double>(
     bool keep_dims, AllocatorPtr allocator,
     const TensorShape* input_shape_override,
     concurrency::ThreadPool* tp, void* einsum_cuda_assets);
-#endif
 
 }  // namespace EinsumOp
 
