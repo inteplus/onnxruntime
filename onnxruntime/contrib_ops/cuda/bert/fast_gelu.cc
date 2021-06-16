@@ -23,7 +23,9 @@ namespace cuda {
       FastGelu<T>);
 
 REGISTER_KERNEL_TYPED(float)
+#if (CUDA_VERSION >= 10000)
 REGISTER_KERNEL_TYPED(MLFloat16)
+#endif
 #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
 REGISTER_KERNEL_TYPED(BFloat16)
 #endif
