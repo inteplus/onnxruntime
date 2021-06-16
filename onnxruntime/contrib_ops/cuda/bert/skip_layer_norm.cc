@@ -21,7 +21,9 @@ namespace cuda {
       SkipLayerNorm<T>);
 
 REGISTER_KERNEL_TYPED(float)
+#if CUDA_VERSION >= 10000
 REGISTER_KERNEL_TYPED(MLFloat16)
+#endif
 
 using namespace ONNX_NAMESPACE;
 
