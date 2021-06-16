@@ -202,7 +202,11 @@ bool LaunchEmbedLayerNormKernel(
         stream, hidden_size, batch_size, sequence_length, input_ids, segment_ids,
         reinterpret_cast<const half*>(beta), reinterpret_cast<const half*>(gamma),
         reinterpret_cast<const half*>(word_embedding), reinterpret_cast<const half*>(position_embedding),
+#if (CUDA_VERSION >= 10000)
         reinterpret_cast<const half*>(segment_embedding), __float2half_rn(epsilon),
+#else
+        reinterpret_cast<const half*>(segment_embedding), half(),
+#endif
         reinterpret_cast<half*>(output));
   } else {
     return EmbedSkipLayerNorm<float>(

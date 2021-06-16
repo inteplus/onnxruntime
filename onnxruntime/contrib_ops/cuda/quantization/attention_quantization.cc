@@ -36,8 +36,10 @@ namespace cuda {
           .TypeConstraint("T4", DataTypeImpl::GetTensorType<int32_t>()), \
       QAttention<T, TQuant>);
 
+#if (CUDA_VERSION >= 10000)
 REGISTER_KERNEL_TYPED(float, int8_t)
 REGISTER_KERNEL_TYPED(MLFloat16, int8_t)
+#endif
 
 template <typename T>
 Status QAttention<T, int8_t>::CheckInputs(const Tensor* input,
