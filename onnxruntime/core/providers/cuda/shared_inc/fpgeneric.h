@@ -164,6 +164,8 @@ inline cublasStatus_t cublasGemmBatchedHelper(cublasHandle_t handle,
                             Carray, ldc,
                             batch_count);
 }
+
+#if defined(CUDA_VERSION) && CUDA_VERSION >= 10000
 inline cublasStatus_t cublasGemmBatchedHelper(cublasHandle_t handle,
                                               cublasOperation_t transa,
                                               cublasOperation_t transb,
@@ -208,6 +210,7 @@ inline cublasStatus_t cublasGemmBatchedHelper(cublasHandle_t handle,
                             batch_count);
 #endif
 }
+#endif
 
 // strided batched gemm
 inline cublasStatus_t cublasGemmStridedBatchedHelper(cublasHandle_t handle,
@@ -272,6 +275,7 @@ inline cublasStatus_t cublasGemmStridedBatchedHelper(cublasHandle_t handle,
                                    batch_count);
 }
 
+#if defined(CUDA_VERSION) && CUDA_VERSION >= 10000
 inline cublasStatus_t cublasGemmStridedBatchedHelper(cublasHandle_t handle,
                                                      cublasOperation_t transa,
                                                      cublasOperation_t transb,
@@ -318,6 +322,7 @@ inline cublasStatus_t cublasGemmStridedBatchedHelper(cublasHandle_t handle,
                                     batch_count);
 #endif
 }
+#endif
 
 // axpy
 inline cublasStatus_t cublasAxpyHelper(cublasHandle_t handle, int n, const float* alpha, const float* x, int incx, float* y, int incy) {
