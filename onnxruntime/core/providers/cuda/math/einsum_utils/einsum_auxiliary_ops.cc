@@ -173,6 +173,7 @@ template std::unique_ptr<Tensor> DeviceHelpers::CudaDeviceHelpers::ReduceSum<dou
     const TensorShape* input_shape_override,
     concurrency::ThreadPool* tp, void* einsum_cuda_assets);
 
+#if defined(CUDA_VERSION) && CUDA_VERSION >= 10000
 // MLFloat16
 template Status DeviceHelpers::CudaDeviceHelpers::MatMul<MLFloat16>(
     const MLFloat16* input_1_data, const MLFloat16* input_2_data, MLFloat16* output_data,
@@ -185,6 +186,7 @@ template std::unique_ptr<Tensor> DeviceHelpers::CudaDeviceHelpers::ReduceSum<MLF
     bool keep_dims, AllocatorPtr allocator,
     const TensorShape* input_shape_override,
     concurrency::ThreadPool* tp, void* einsum_cuda_assets);
+#endif
 
 }  // namespace EinsumOp
 
