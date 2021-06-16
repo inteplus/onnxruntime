@@ -123,7 +123,11 @@ bool LaunchSkipLayerNormKernel(
         reinterpret_cast<const half*>(beta),
         reinterpret_cast<const half*>(gamma),
         reinterpret_cast<const half*>(bias),
+#if CUDA_VERSION >= 10000
         __float2half_rn(epsilon),
+#else
+        half(),
+#endif
         reinterpret_cast<half*>(output));
   } else {
     return ComputeSkipLayerNorm(
