@@ -97,7 +97,7 @@ struct Inverse::ComputeImpl {
         IAllocatorUniquePtr<float> ml_float_output = inst->GetScratchBuffer<float>(input_count);
         ORT_RETURN_IF_ERROR(ComputeMatrixOffsets<float>(ml_float_output.get(), num_batches, rows, output_ptrs));
         // Do the inverse
-        CUBLAS_RETURN_IF_ERROR(cublasSgetriBatched(cublas_h, dim, matrix_ptrs.get(), dim, pivots.get(), output_ptrs.get(), dim, info.get(), n_batches));
+        CUBLAS_RETURN_IF_ERROR(cublasSgetriBatched(cublas_h, dim, (const float**)matrix_ptrs.get(), dim, pivots.get(), output_ptrs.get(), dim, info.get(), n_batches));
         ORT_RETURN_IF_ERROR(CheckForSingularity(info, info_cpu, num_batches));
         // Copy the result to output with casting
         Impl_Cast<float, CudaT>(ml_float_output.get(), reinterpret_cast<CudaT*>(output.MutableData<MLFloat16>()), input_count);
@@ -105,7 +105,7 @@ struct Inverse::ComputeImpl {
       } else {
         ORT_RETURN_IF_ERROR(ComputeMatrixOffsets<float>(output.MutableData<float>(), num_batches, rows, output_ptrs));
         // Do the inverse
-        CUBLAS_RETURN_IF_ERROR(cublasSgetriBatched(cublas_h, dim, matrix_ptrs.get(), dim, pivots.get(), output_ptrs.get(), dim, info.get(), n_batches));
+        CUBLAS_RETURN_IF_ERROR(cublasSgetriBatched(cublas_h, dim, (const float**)matrix_ptrs.get(), dim, pivots.get(), output_ptrs.get(), dim, info.get(), n_batches));
         ORT_RETURN_IF_ERROR(CheckForSingularity(info, info_cpu, num_batches));
         // We are done here
       }
@@ -123,7 +123,7 @@ struct Inverse::ComputeImpl {
       // Need to compute ptrs for output buffers
       IAllocatorUniquePtr<double*> output_ptrs = inst->GetScratchBuffer<double*>(n_batches);
       ORT_RETURN_IF_ERROR(ComputeMatrixOffsets<double>(output.MutableData<double>(), num_batches, rows, output_ptrs));
-      CUBLAS_RETURN_IF_ERROR(cublasDgetriBatched(cublas_h, dim, matrix_ptrs.get(), dim, pivots.get(), output_ptrs.get(), dim, info.get(), n_batches));
+      CUBLAS_RETURN_IF_ERROR(cublasDgetriBatched(cublas_h, dim, (const double**)matrix_ptrs.get(), dim, pivots.get(), output_ptrs.get(), dim, info.get(), n_batches));
       ORT_RETURN_IF_ERROR(CheckForSingularity(info, info_cpu, num_batches));
       // We are done here
     } else {
