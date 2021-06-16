@@ -193,6 +193,7 @@ inline cublasStatus_t cublasGemmBatchedHelper(cublasHandle_t handle,
                             batch_count);
 }
 
+#if defined(CUDA_VERSION) && CUDA_VERSION >= 10000
 inline cublasStatus_t cublasGemmBatchedHelper(cublasHandle_t handle,
                                               cublasOperation_t transa,
                                               cublasOperation_t transb,
@@ -236,6 +237,7 @@ inline cublasStatus_t cublasGemmBatchedHelper(cublasHandle_t handle,
                                CUBLAS_GEMM_DEFAULT);
   }
 }
+#endif
 
 #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
 inline cublasStatus_t cublasGemmBatchedHelper(cublasHandle_t handle,
@@ -331,6 +333,7 @@ inline cublasStatus_t cublasGemmStridedBatchedHelper(cublasHandle_t handle,
                                    batch_count);
 }
 
+#if defined(CUDA_VERSION) && CUDA_VERSION >= 10000
 inline cublasStatus_t cublasGemmStridedBatchedHelper(cublasHandle_t handle,
                                                      cublasOperation_t transa,
                                                      cublasOperation_t transb,
@@ -378,6 +381,7 @@ inline cublasStatus_t cublasGemmStridedBatchedHelper(cublasHandle_t handle,
                                       CUBLAS_GEMM_DEFAULT);
   }
 }
+#endif
 
 #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
 inline cublasStatus_t cublasGemmStridedBatchedHelper(cublasHandle_t handle,
